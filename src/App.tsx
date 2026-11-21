@@ -25,6 +25,10 @@ import {
   Flame,
   Gamepad2,
   Image as ImageIcon,
+  History as HistoryIcon,
+  ChevronDown,
+  ChevronUp,
+  Eye,
 } from 'lucide-react';
 import { WORD_BANK, WordCategory } from './data/wordBank';
 import {
@@ -33,8 +37,35 @@ import {
   generateExamplePresetTest,
 } from './utils/testGenerator';
 
-type ActiveTab = 'test' | 'leaderboard' | 'words';
+type ActiveTab = 'test' | 'leaderboard' | 'history' | 'words';
 export type AppTheme = 'classic' | 'gta6';
+
+export interface SavedDefinitionAnswer {
+  id: string;
+  definition: string;
+  correctItemNumber: number;
+  userItemNumber: number | null;
+  isCorrect: boolean;
+  correctWord: {
+    testDisplay: string;
+    hebrew: string;
+  };
+  userWord?: {
+    testDisplay: string;
+    hebrew: string;
+  };
+}
+
+export interface SavedQuestionRecord {
+  questionNumber: number;
+  categoryLabel: string;
+  items: {
+    number: number;
+    testDisplay: string;
+    hebrew: string;
+  }[];
+  definitions: SavedDefinitionAnswer[];
+}
 
 export interface LeaderboardEntry {
   id: string;
@@ -45,6 +76,9 @@ export interface LeaderboardEntry {
   testType: string;
   date: string;
   theme?: AppTheme;
+  questions?: TestQuestion[];
+  answers?: Record<string, string>;
+  detailedHistory?: SavedQuestionRecord[];
 }
 
 export interface GtaWallpaper {
@@ -172,6 +206,12 @@ export default function App() {
     'all'
   );
 
+  // History view states: expanded test entry ID & optional student filter
+  const [expandedHistoryId, setExpandedHistoryId] = useState<string | null>(
+    null
+  );
+  const [historyPlayerFilter, setHistoryPlayerFilter] = useState<string>('all');
+
   // Sync with server-side persistent JSON store (/api/leaderboard) and merge any existing local mobile/desktop entries
   const syncLeaderboardWithServer = async () => {
     setIsSyncingLeaderboard(true);
@@ -226,9 +266,9 @@ export default function App() {
     syncLeaderboardWithServer();
   }, []);
 
-  // Refresh from server whenever switching to the Leaderboard tab
+  // Refresh from server whenever switching to the Leaderboard or History tab
   useEffect(() => {
-    if (activeTab === 'leaderboard') {
+    if (activeTab === 'leaderboard' || activeTab === 'history') {
       syncLeaderboardWithServer();
     }
   }, [activeTab]);
@@ -395,6 +435,47 @@ export default function App() {
     });
     const points = Math.round((correct / totalDefinitions) * 100);
 
+    // Build detailed question & answer history for this test attempt
+    const detailedHistory: SavedQuestionRecord[] = questions.map((q) => ({
+      questionNumber: q.questionNumber,
+      categoryLabel: q.categoryLabel,
+      items: q.items.map((it) => ({
+        number: it.number,
+        testDisplay: it.word.testDisplay,
+        hebrew: it.word.hebrew,
+      })),
+      definitions: q.definitions.map((def) => {
+        const rawAns = answers[def.id] || '';
+        const parsedNum = parseInt(rawAns, 10);
+        const userItemNumber = !isNaN(parsedNum) ? parsedNum : null;
+        const correctItem = q.items.find(
+          (i) => i.number === def.correctItemNumber
+        );
+        const userItem =
+          userItemNumber !== null
+            ? q.items.find((i) => i.number === userItemNumber)
+            : undefined;
+
+        return {
+          id: def.id,
+          definition: def.definition,
+          correctItemNumber: def.correctItemNumber,
+          userItemNumber,
+          isCorrect: userItemNumber === def.correctItemNumber,
+          correctWord: {
+            testDisplay: correctItem?.word.testDisplay || '',
+            hebrew: correctItem?.word.hebrew || '',
+          },
+          userWord: userItem
+            ? {
+                testDisplay: userItem.word.testDisplay,
+                hebrew: userItem.word.hebrew,
+              }
+            : undefined,
+        };
+      }),
+    }));
+
     const newEntry: LeaderboardEntry = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       name: playerName || 'Student',
@@ -409,6 +490,9 @@ export default function App() {
         minute: '2-digit',
       }),
       theme,
+      questions,
+      answers: { ...answers },
+      detailedHistory,
     };
 
     const nextLeaderboard = [newEntry, ...leaderboard].sort(
@@ -653,6 +737,21 @@ export default function App() {
                     {leaderboard.length}
                   </span>
                 )}
+              </button>
+              <button
+                onClick={() => setActiveTab('history')}
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+                  activeTab === 'history'
+                    ? isGta
+                      ? 'gta-btn-gradient text-white font-bold'
+                      : 'bg-white text-indigo-700 shadow-sm'
+                    : isGta
+                    ? 'text-pink-200/75 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <HistoryIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span>History</span>
               </button>
               <button
                 onClick={() => setActiveTab('words')}
@@ -2252,7 +2351,26 @@ export default function App() {
                           </div>
                         </div>
 
-                        <div className="text-right shrink-0">
+                        <div className="flex items-center gap-2 shrink-0">
+                          {(entry.detailedHistory || entry.questions) && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setExpandedHistoryId(entry.id);
+                                setHistoryPlayerFilter('all');
+                                setActiveTab('history');
+                              }}
+                              className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
+                                isGta
+                                  ? 'bg-white/10 text-cyan-200 border-cyan-400/40 hover:bg-white/20'
+                                  : 'bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100'
+                              }`}
+                              title="View full questions & answers history for this test"
+                            >
+                              <Eye className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">View Q&A</span>
+                            </button>
+                          )}
                           <span
                             className={`inline-block px-3 py-1 rounded-xl font-bold text-sm sm:text-base ${
                               entry.points >= 80
@@ -2268,6 +2386,505 @@ export default function App() {
                       </div>
                     );
                   })}
+                </div>
+              )}
+            </div>
+          </div>
+        ) : activeTab === 'history' ? (
+          /* 3. TEST HISTORY VIEW (ALL SAVED QUESTIONS & ANSWERS FOR EACH TEST) */
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div
+              className={`p-5 sm:p-8 rounded-2xl border ${
+                isGta ? 'gta-card' : 'bg-white border-slate-200 paper-shadow'
+              }`}
+            >
+              <div
+                className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b ${
+                  isGta ? 'border-pink-500/30' : 'border-slate-200'
+                }`}
+              >
+                <div className="flex items-center gap-3.5">
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${
+                      isGta
+                        ? 'bg-pink-500/20 text-cyan-300 border border-pink-500/40'
+                        : 'bg-indigo-100 text-indigo-600'
+                    }`}
+                  >
+                    <HistoryIcon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h2
+                      className={`text-xl sm:text-2xl font-bold ${
+                        isGta
+                          ? 'gta-font gta-text-gradient uppercase'
+                          : 'text-slate-900'
+                      }`}
+                    >
+                      Test Questions & Answers History
+                    </h2>
+                    <p
+                      className={`text-xs sm:text-sm ${
+                        isGta ? 'text-pink-200/80' : 'text-slate-500'
+                      }`}
+                    >
+                      Click any completed test to review all 5 questions, the 6
+                      words on the left, the user's answers, and the right
+                      answers.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={syncLeaderboardWithServer}
+                    disabled={isSyncingLeaderboard}
+                    className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition-colors ${
+                      isGta
+                        ? 'bg-white/10 text-cyan-200 border-cyan-400/30 hover:bg-white/15'
+                        : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                    }`}
+                  >
+                    <RotateCcw
+                      className={`w-3.5 h-3.5 ${
+                        isSyncingLeaderboard ? 'animate-spin' : ''
+                      }`}
+                    />
+                    <span>
+                      {isSyncingLeaderboard ? 'Syncing...' : 'Refresh'}
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('test')}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white shadow-sm transition-all ${
+                      isGta
+                        ? 'gta-btn-gradient'
+                        : 'bg-indigo-600 hover:bg-indigo-700'
+                    }`}
+                  >
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Back to Test</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Player Filter Pills if there are multiple students */}
+              {leaderboard.length > 0 && (
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <span
+                    className={`text-xs font-semibold mr-1 ${
+                      isGta ? 'text-cyan-300' : 'text-slate-500'
+                    }`}
+                  >
+                    Filter by student:
+                  </span>
+                  {['all', ...Array.from(new Set(leaderboard.map((e) => e.name)))].map(
+                    (student) => (
+                      <button
+                        key={student}
+                        type="button"
+                        onClick={() => setHistoryPlayerFilter(student)}
+                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                          historyPlayerFilter === student
+                            ? isGta
+                              ? 'gta-btn-gradient text-white'
+                              : 'bg-indigo-600 text-white'
+                            : isGta
+                            ? 'bg-white/10 text-pink-200 hover:bg-white/15'
+                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                        }`}
+                      >
+                        {student === 'all' ? `All (${leaderboard.length})` : student}
+                      </button>
+                    )
+                  )}
+                </div>
+              )}
+
+              {leaderboard.length === 0 ? (
+                <div className="text-center py-12 px-4">
+                  <HistoryIcon className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                  <h3
+                    className={`text-base font-bold ${
+                      isGta ? 'text-white' : 'text-slate-700'
+                    }`}
+                  >
+                    No test history yet!
+                  </h3>
+                  <p
+                    className={`text-sm mt-1 max-w-sm mx-auto ${
+                      isGta ? 'text-pink-200/75' : 'text-slate-500'
+                    }`}
+                  >
+                    Complete a vocabulary test and every question and answer
+                    from that test will be saved here for review.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-6 space-y-4">
+                  {[...leaderboard]
+                    .filter(
+                      (e) =>
+                        historyPlayerFilter === 'all' ||
+                        e.name === historyPlayerFilter
+                    )
+                    // Order chronologically (newest first based on timestamp id prefix)
+                    .sort((a, b) => {
+                      const tA = parseInt(a.id.split('-')[0] || '0', 10);
+                      const tB = parseInt(b.id.split('-')[0] || '0', 10);
+                      return tB - tA;
+                    })
+                    .map((entry) => {
+                      const isExpanded = expandedHistoryId === entry.id;
+
+                      // Reconstruct detailedHistory from entry.detailedHistory or entry.questions + entry.answers
+                      const historyRecords: SavedQuestionRecord[] =
+                        entry.detailedHistory ||
+                        (entry.questions
+                          ? entry.questions.map((q) => ({
+                              questionNumber: q.questionNumber,
+                              categoryLabel: q.categoryLabel,
+                              items: q.items.map((it) => ({
+                                number: it.number,
+                                testDisplay: it.word.testDisplay,
+                                hebrew: it.word.hebrew,
+                              })),
+                              definitions: q.definitions.map((def) => {
+                                const rawAns =
+                                  (entry.answers && entry.answers[def.id]) || '';
+                                const parsedNum = parseInt(rawAns, 10);
+                                const userItemNumber = !isNaN(parsedNum)
+                                  ? parsedNum
+                                  : null;
+                                const correctItem = q.items.find(
+                                  (i) => i.number === def.correctItemNumber
+                                );
+                                const userItem =
+                                  userItemNumber !== null
+                                    ? q.items.find(
+                                        (i) => i.number === userItemNumber
+                                      )
+                                    : undefined;
+                                return {
+                                  id: def.id,
+                                  definition: def.definition,
+                                  correctItemNumber: def.correctItemNumber,
+                                  userItemNumber,
+                                  isCorrect:
+                                    userItemNumber === def.correctItemNumber,
+                                  correctWord: {
+                                    testDisplay:
+                                      correctItem?.word.testDisplay || '',
+                                    hebrew: correctItem?.word.hebrew || '',
+                                  },
+                                  userWord: userItem
+                                    ? {
+                                        testDisplay: userItem.word.testDisplay,
+                                        hebrew: userItem.word.hebrew,
+                                      }
+                                    : undefined,
+                                };
+                              }),
+                            }))
+                          : []);
+
+                      return (
+                        <div
+                          key={entry.id}
+                          className={`rounded-2xl border overflow-hidden transition-all ${
+                            isGta
+                              ? isExpanded
+                                ? 'bg-black/55 border-cyan-400/60 shadow-[0_0_20px_rgba(6,182,212,0.2)]'
+                                : 'bg-black/35 border-pink-500/30 hover:border-pink-400/60'
+                              : isExpanded
+                              ? 'bg-white border-indigo-300 shadow-md'
+                              : 'bg-slate-50/70 border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          {/* Collapsible Test Attempt Header */}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedHistoryId(isExpanded ? null : entry.id)
+                            }
+                            className="w-full flex items-center justify-between gap-3 p-4 sm:p-5 text-left"
+                          >
+                            <div className="flex items-center gap-3.5 min-w-0">
+                              <div
+                                className={`w-12 h-12 rounded-xl flex flex-col items-center justify-center font-bold shrink-0 ${
+                                  entry.points >= 80
+                                    ? 'bg-emerald-600 text-white'
+                                    : entry.points >= 60
+                                    ? 'bg-amber-500 text-white'
+                                    : 'bg-rose-600 text-white'
+                                }`}
+                              >
+                                <span className="text-sm sm:text-base leading-none">
+                                  {entry.points}
+                                </span>
+                                <span className="text-[9px] uppercase opacity-90">
+                                  pts
+                                </span>
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span
+                                    className={`font-bold text-base sm:text-lg truncate ${
+                                      isGta ? 'text-white' : 'text-slate-900'
+                                    }`}
+                                  >
+                                    {entry.name}
+                                  </span>
+                                  <span
+                                    className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                                      isGta
+                                        ? 'bg-pink-500/20 text-pink-200 border border-pink-500/30'
+                                        : 'bg-slate-200/80 text-slate-700'
+                                    }`}
+                                  >
+                                    {entry.testType}
+                                  </span>
+                                </div>
+                                <p
+                                  className={`text-xs sm:text-sm mt-0.5 ${
+                                    isGta
+                                      ? 'text-pink-200/75'
+                                      : 'text-slate-500'
+                                  }`}
+                                >
+                                  Matched{' '}
+                                  <strong>
+                                    {entry.correctCount} / {entry.totalCount}
+                                  </strong>{' '}
+                                  definitions • {entry.date}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 shrink-0">
+                              <span
+                                className={`text-xs font-semibold px-3 py-1.5 rounded-xl border flex items-center gap-1.5 ${
+                                  isGta
+                                    ? 'bg-white/10 text-cyan-200 border-cyan-400/30'
+                                    : 'bg-white text-indigo-700 border-slate-200 shadow-2xs'
+                                }`}
+                              >
+                                <span>
+                                  {isExpanded
+                                    ? 'Hide Q&A'
+                                    : 'View Questions & Answers'}
+                                </span>
+                                {isExpanded ? (
+                                  <ChevronUp className="w-4 h-4" />
+                                ) : (
+                                  <ChevronDown className="w-4 h-4" />
+                                )}
+                              </span>
+                            </div>
+                          </button>
+
+                          {/* Expanded Full 5 Questions & Answers Breakdown */}
+                          {isExpanded && (
+                            <div
+                              className={`border-t px-4 sm:px-6 py-5 space-y-5 ${
+                                isGta
+                                  ? 'border-pink-500/30 bg-[#120422]/60'
+                                  : 'border-slate-200 bg-white'
+                              }`}
+                            >
+                              {historyRecords.length === 0 ? (
+                                <p
+                                  className={`text-sm italic ${
+                                    isGta ? 'text-pink-200/70' : 'text-slate-500'
+                                  }`}
+                                >
+                                  Detailed question history was not recorded for
+                                  this older entry.
+                                </p>
+                              ) : (
+                                historyRecords.map((qRec) => {
+                                  const qCorrect = qRec.definitions.filter(
+                                    (d) => d.isCorrect
+                                  ).length;
+                                  return (
+                                    <div
+                                      key={qRec.questionNumber}
+                                      className={`p-4 rounded-xl border ${
+                                        isGta
+                                          ? 'bg-black/40 border-pink-500/25'
+                                          : 'bg-slate-50/70 border-slate-200'
+                                      }`}
+                                    >
+                                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-200/30">
+                                        <span
+                                          className={`font-serif font-bold text-sm sm:text-base ${
+                                            isGta
+                                              ? 'text-white'
+                                              : 'text-slate-900'
+                                          }`}
+                                        >
+                                          Question ({qRec.questionNumber}) —{' '}
+                                          <span
+                                            className={`font-sans text-xs uppercase tracking-wider ${
+                                              isGta
+                                                ? 'text-cyan-300'
+                                                : 'text-indigo-600'
+                                            }`}
+                                          >
+                                            {qRec.categoryLabel}
+                                          </span>
+                                        </span>
+                                        <span
+                                          className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                                            qCorrect === 3
+                                              ? 'bg-emerald-100 text-emerald-800'
+                                              : qCorrect >= 1
+                                              ? 'bg-amber-100 text-amber-800'
+                                              : 'bg-rose-100 text-rose-800'
+                                          }`}
+                                        >
+                                          {qCorrect} / 3 Correct
+                                        </span>
+                                      </div>
+
+                                      <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                                        {/* Left 6 Words with Hebrew */}
+                                        <div className="md:w-64 shrink-0 grid grid-cols-2 md:grid-cols-1 gap-1.5">
+                                          {qRec.items.map((item) => (
+                                            <div
+                                              key={item.number}
+                                              className={`px-2.5 py-1.5 rounded-lg border text-xs sm:text-sm flex items-center justify-between gap-2 ${
+                                                isGta
+                                                  ? 'bg-white/5 border-white/10 text-white'
+                                                  : 'bg-white border-slate-200 text-slate-800'
+                                              }`}
+                                            >
+                                              <span className="font-serif font-medium truncate">
+                                                <strong>{item.number}.</strong>{' '}
+                                                {item.testDisplay}
+                                              </span>
+                                              {item.hebrew && (
+                                                <span
+                                                  dir="rtl"
+                                                  className={`text-[11px] font-sans font-semibold shrink-0 ${
+                                                    isGta
+                                                      ? 'text-cyan-300'
+                                                      : 'text-indigo-700'
+                                                  }`}
+                                                >
+                                                  {item.hebrew}
+                                                </span>
+                                              )}
+                                            </div>
+                                          ))}
+                                        </div>
+
+                                        {/* Right 3 Definitions & User Answer vs Correct Answer */}
+                                        <div className="flex-1 space-y-2.5">
+                                          {qRec.definitions.map((def) => (
+                                            <div
+                                              key={def.id}
+                                              className={`p-3 rounded-xl border ${
+                                                def.isCorrect
+                                                  ? isGta
+                                                    ? 'bg-emerald-950/60 border-emerald-400/50'
+                                                    : 'bg-emerald-50/80 border-emerald-200'
+                                                  : isGta
+                                                  ? 'bg-rose-950/60 border-rose-400/50'
+                                                  : 'bg-rose-50/80 border-rose-200'
+                                              }`}
+                                            >
+                                              <div className="flex items-start gap-2.5">
+                                                {def.isCorrect ? (
+                                                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                                                ) : (
+                                                  <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                                                )}
+                                                <div className="flex-1 min-w-0">
+                                                  <p
+                                                    className={`font-serif text-sm sm:text-base ${
+                                                      isGta
+                                                        ? 'text-white'
+                                                        : 'text-slate-900'
+                                                    }`}
+                                                  >
+                                                    {def.definition}
+                                                  </p>
+                                                  <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs font-sans">
+                                                    {def.isCorrect ? (
+                                                      <span
+                                                        className={`font-semibold ${
+                                                          isGta
+                                                            ? 'text-emerald-300'
+                                                            : 'text-emerald-800'
+                                                        }`}
+                                                      >
+                                                        ✓ Answered: (
+                                                        {def.correctItemNumber}){' '}
+                                                        {
+                                                          def.correctWord
+                                                            .testDisplay
+                                                        }{' '}
+                                                        {def.correctWord
+                                                          .hebrew &&
+                                                          `(${def.correctWord.hebrew})`}
+                                                      </span>
+                                                    ) : (
+                                                      <>
+                                                        <span
+                                                          className={`font-medium ${
+                                                            isGta
+                                                              ? 'text-rose-300'
+                                                              : 'text-rose-700'
+                                                          }`}
+                                                        >
+                                                          User answered:{' '}
+                                                          <strong>
+                                                            {def.userItemNumber !==
+                                                            null
+                                                              ? `(${
+                                                                  def.userItemNumber
+                                                                }) ${
+                                                                  def.userWord
+                                                                    ?.testDisplay ||
+                                                                  ''
+                                                                }`
+                                                              : 'No answer'}
+                                                          </strong>
+                                                        </span>
+                                                        <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300">
+                                                          Right Answer: (
+                                                          {
+                                                            def.correctItemNumber
+                                                          }
+                                                          ){' '}
+                                                          {
+                                                            def.correctWord
+                                                              .testDisplay
+                                                          }{' '}
+                                                          {def.correctWord
+                                                            .hebrew &&
+                                                            `• ${def.correctWord.hebrew}`}
+                                                        </span>
+                                                      </>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               )}
             </div>

@@ -1,0 +1,908 @@
+[
+  {
+    "id": "1795273085787-7yvmw",
+    "name": "Alon",
+    "points": 13,
+    "correctCount": 2,
+    "totalCount": 15,
+    "testType": "Random Generated Test",
+    "date": "21 Nov, 16:58",
+    "theme": "gta6",
+    "questions": [
+      {
+        "questionNumber": 1,
+        "categoryLabel": "Nouns",
+        "items": [
+          {
+            "number": 1,
+            "word": {
+              "id": "appeal",
+              "rawLabel": "appeal (n)",
+              "testDisplay": "appeal",
+              "category": "noun",
+              "definition": "a quality that makes people like something",
+              "hebrew": "משיכה / קסם / פנייה"
+            }
+          },
+          {
+            "number": 2,
+            "word": {
+              "id": "warehouse",
+              "rawLabel": "warehouse",
+              "testDisplay": "warehouse",
+              "category": "noun",
+              "definition": "a large building where goods are stored",
+              "hebrew": "מחסן"
+            }
+          },
+          {
+            "number": 3,
+            "word": {
+              "id": "fame",
+              "rawLabel": "fame",
+              "testDisplay": "fame",
+              "category": "noun",
+              "definition": "the state of being known by many people",
+              "hebrew": "תהילה / פרסום"
+            }
+          },
+          {
+            "number": 4,
+            "word": {
+              "id": "purchase",
+              "rawLabel": "purchase (n)",
+              "testDisplay": "purchase",
+              "category": "noun",
+              "definition": "something that you buy, or the act of buying",
+              "hebrew": "רכישה / קנייה"
+            }
+          },
+          {
+            "number": 5,
+            "word": {
+              "id": "critic",
+              "rawLabel": "critic",
+              "testDisplay": "critic",
+              "category": "noun",
+              "definition": "someone who judges or expresses disapproval of something",
+              "hebrew": "מבקר"
+            }
+          },
+          {
+            "number": 6,
+            "word": {
+              "id": "impact",
+              "rawLabel": "impact (n)",
+              "testDisplay": "impact",
+              "category": "noun",
+              "definition": "a strong effect or influence on someone or something",
+              "hebrew": "השפעה / רושם"
+            }
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q1-def1-appeal",
+            "definition": "a quality that makes people like something",
+            "correctItemNumber": 1,
+            "wordId": "appeal"
+          },
+          {
+            "id": "q1-def2-impact",
+            "definition": "a strong effect or influence on someone or something",
+            "correctItemNumber": 6,
+            "wordId": "impact"
+          },
+          {
+            "id": "q1-def3-purchase",
+            "definition": "something that you buy, or the act of buying",
+            "correctItemNumber": 4,
+            "wordId": "purchase"
+          }
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "categoryLabel": "Adjectives",
+        "items": [
+          {
+            "number": 1,
+            "word": {
+              "id": "likely",
+              "rawLabel": "likely",
+              "testDisplay": "likely",
+              "category": "adjective",
+              "definition": "probable or expected to happen",
+              "hebrew": "סביר / צפוי"
+            }
+          },
+          {
+            "number": 2,
+            "word": {
+              "id": "self_service",
+              "rawLabel": "self-service",
+              "testDisplay": "self-service",
+              "category": "adjective",
+              "definition": "where customers serve themselves and pay at a checkout",
+              "hebrew": "שירות עצמי"
+            }
+          },
+          {
+            "number": 3,
+            "word": {
+              "id": "rural",
+              "rawLabel": "rural",
+              "testDisplay": "rural",
+              "category": "adjective",
+              "definition": "in, relating to, or characteristic of the countryside",
+              "hebrew": "כפרי"
+            }
+          },
+          {
+            "number": 4,
+            "word": {
+              "id": "wise",
+              "rawLabel": "wise",
+              "testDisplay": "wise",
+              "category": "adjective",
+              "definition": "having experience, knowledge, and good judgment",
+              "hebrew": "חכם / נבון"
+            }
+          },
+          {
+            "number": 5,
+            "word": {
+              "id": "private",
+              "rawLabel": "private",
+              "testDisplay": "private",
+              "category": "adjective",
+              "definition": "for the use of one person or group only, not public",
+              "hebrew": "פרטי"
+            }
+          },
+          {
+            "number": 6,
+            "word": {
+              "id": "efficient",
+              "rawLabel": "efficient",
+              "testDisplay": "efficient",
+              "category": "adjective",
+              "definition": "working well and quickly without wasting time or energy",
+              "hebrew": "יעיל"
+            }
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q2-def1-likely",
+            "definition": "probable or expected to happen",
+            "correctItemNumber": 1,
+            "wordId": "likely"
+          },
+          {
+            "id": "q2-def2-self_service",
+            "definition": "where customers serve themselves and pay at a checkout",
+            "correctItemNumber": 2,
+            "wordId": "self_service"
+          },
+          {
+            "id": "q2-def3-wise",
+            "definition": "having experience, knowledge, and good judgment",
+            "correctItemNumber": 4,
+            "wordId": "wise"
+          }
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "categoryLabel": "Verbs",
+        "items": [
+          {
+            "number": 1,
+            "word": {
+              "id": "fire",
+              "rawLabel": "fire (v)",
+              "testDisplay": "to fire",
+              "category": "verb",
+              "definition": "dismiss someone from a job",
+              "hebrew": "לפטר"
+            }
+          },
+          {
+            "number": 2,
+            "word": {
+              "id": "experiment",
+              "rawLabel": "experiment (v)",
+              "testDisplay": "to experiment",
+              "category": "verb",
+              "definition": "try out new ideas or methods to see what happens",
+              "hebrew": "לערוך ניסוי / להתנסות"
+            }
+          },
+          {
+            "number": 3,
+            "word": {
+              "id": "absorb",
+              "rawLabel": "absorb",
+              "testDisplay": "to absorb",
+              "category": "verb",
+              "definition": "take in liquid, gas, or information",
+              "hebrew": "לספוג / לקלוט"
+            }
+          },
+          {
+            "number": 4,
+            "word": {
+              "id": "predict",
+              "rawLabel": "predict",
+              "testDisplay": "to predict",
+              "category": "verb",
+              "definition": "say what you think will happen in the future",
+              "hebrew": "לחזות / לנבא"
+            }
+          },
+          {
+            "number": 5,
+            "word": {
+              "id": "face",
+              "rawLabel": "face (v)",
+              "testDisplay": "to face",
+              "category": "verb",
+              "definition": "confront and deal with a difficult situation",
+              "hebrew": "להתמודד עם / לעמוד בפני"
+            }
+          },
+          {
+            "number": 6,
+            "word": {
+              "id": "review",
+              "rawLabel": "review (v)",
+              "testDisplay": "to review",
+              "category": "verb",
+              "definition": "examine or assess something carefully",
+              "hebrew": "לסקור / לבחון מחדש"
+            }
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q3-def1-predict",
+            "definition": "say what you think will happen in the future",
+            "correctItemNumber": 4,
+            "wordId": "predict"
+          },
+          {
+            "id": "q3-def2-absorb",
+            "definition": "take in liquid, gas, or information",
+            "correctItemNumber": 3,
+            "wordId": "absorb"
+          },
+          {
+            "id": "q3-def3-experiment",
+            "definition": "try out new ideas or methods to see what happens",
+            "correctItemNumber": 2,
+            "wordId": "experiment"
+          }
+        ]
+      },
+      {
+        "questionNumber": 4,
+        "categoryLabel": "Adverbs",
+        "items": [
+          {
+            "number": 1,
+            "word": {
+              "id": "financially",
+              "rawLabel": "financially",
+              "testDisplay": "financially",
+              "category": "adverb",
+              "definition": "in a way that relates to money or finance",
+              "hebrew": "מבחינה כלכלית / כספית"
+            }
+          },
+          {
+            "number": 2,
+            "word": {
+              "id": "virtually",
+              "rawLabel": "virtually",
+              "testDisplay": "virtually",
+              "category": "adverb",
+              "definition": "nearly, almost completely, or by means of a computer",
+              "hebrew": "כמעט לחלוטין / באופן וירטואלי"
+            }
+          },
+          {
+            "number": 3,
+            "word": {
+              "id": "increasingly",
+              "rawLabel": "increasingly",
+              "testDisplay": "increasingly",
+              "category": "adverb",
+              "definition": "happening more and more",
+              "hebrew": "במידה הולכת וגוברת"
+            }
+          },
+          {
+            "number": 4,
+            "word": {
+              "id": "hardly",
+              "rawLabel": "hardly",
+              "testDisplay": "hardly",
+              "category": "adverb",
+              "definition": "barely, almost not at all",
+              "hebrew": "בקושי / כמעט ולא"
+            }
+          },
+          {
+            "number": 5,
+            "word": {
+              "id": "primarily",
+              "rawLabel": "primarily",
+              "testDisplay": "primarily",
+              "category": "adverb",
+              "definition": "mainly, for the most part",
+              "hebrew": "בעיקר / בראש ובראשונה"
+            }
+          },
+          {
+            "number": 6,
+            "word": {
+              "id": "practically",
+              "rawLabel": "practically",
+              "testDisplay": "practically",
+              "category": "adverb",
+              "definition": "almost completely, or in a realistic and useful way",
+              "hebrew": "כמעט / באופן מעשי"
+            }
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q4-def1-increasingly",
+            "definition": "happening more and more",
+            "correctItemNumber": 3,
+            "wordId": "increasingly"
+          },
+          {
+            "id": "q4-def2-financially",
+            "definition": "in a way that relates to money or finance",
+            "correctItemNumber": 1,
+            "wordId": "financially"
+          },
+          {
+            "id": "q4-def3-practically",
+            "definition": "almost completely, or in a realistic and useful way",
+            "correctItemNumber": 6,
+            "wordId": "practically"
+          }
+        ]
+      },
+      {
+        "questionNumber": 5,
+        "categoryLabel": "Chunks & Expressions",
+        "items": [
+          {
+            "number": 1,
+            "word": {
+              "id": "run_out_of",
+              "rawLabel": "run out of",
+              "testDisplay": "run out of",
+              "category": "chunk",
+              "definition": "use up all of something so that none is left",
+              "hebrew": "להיגמר / לאזול"
+            }
+          },
+          {
+            "number": 2,
+            "word": {
+              "id": "in_theory",
+              "rawLabel": "in theory",
+              "testDisplay": "in theory",
+              "category": "chunk",
+              "definition": "according to an idea that may not work in practice",
+              "hebrew": "בתאוריה / להלכה"
+            }
+          },
+          {
+            "number": 3,
+            "word": {
+              "id": "keep_track_of",
+              "rawLabel": "keep track of",
+              "testDisplay": "keep track of",
+              "category": "chunk",
+              "definition": "stay informed about someone or something over time",
+              "hebrew": "לעקוב אחר"
+            }
+          },
+          {
+            "number": 4,
+            "word": {
+              "id": "in_place_of",
+              "rawLabel": "in place of",
+              "testDisplay": "in place of",
+              "category": "chunk",
+              "definition": "instead of someone or something else",
+              "hebrew": "במקום (משהו אחר)"
+            }
+          },
+          {
+            "number": 5,
+            "word": {
+              "id": "relate_to",
+              "rawLabel": "relate to",
+              "testDisplay": "relate to",
+              "category": "chunk",
+              "definition": "understand and feel sympathy for someone or something",
+              "hebrew": "להזדהות עם / להתייחס ל-"
+            }
+          },
+          {
+            "number": 6,
+            "word": {
+              "id": "while",
+              "rawLabel": "while",
+              "testDisplay": "while",
+              "category": "chunk",
+              "definition": "during the time that, or at the same time as",
+              "hebrew": "בזמן ש- / בעוד ש-"
+            }
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q5-def1-while",
+            "definition": "during the time that, or at the same time as",
+            "correctItemNumber": 6,
+            "wordId": "while"
+          },
+          {
+            "id": "q5-def2-relate_to",
+            "definition": "understand and feel sympathy for someone or something",
+            "correctItemNumber": 5,
+            "wordId": "relate_to"
+          },
+          {
+            "id": "q5-def3-in_theory",
+            "definition": "according to an idea that may not work in practice",
+            "correctItemNumber": 2,
+            "wordId": "in_theory"
+          }
+        ]
+      }
+    ],
+    "answers": {
+      "q1-def1-appeal": "1",
+      "q1-def3-purchase": "2",
+      "q1-def2-impact": "3",
+      "q2-def1-likely": "3",
+      "q2-def2-self_service": "4",
+      "q2-def3-wise": "5",
+      "q3-def1-predict": "1",
+      "q3-def2-absorb": "2",
+      "q3-def3-experiment": "3",
+      "q4-def1-increasingly": "1",
+      "q4-def2-financially": "2",
+      "q4-def3-practically": "3",
+      "q5-def2-relate_to": "1",
+      "q5-def3-in_theory": "2",
+      "q5-def1-while": "3"
+    },
+    "detailedHistory": [
+      {
+        "questionNumber": 1,
+        "categoryLabel": "Nouns",
+        "items": [
+          {
+            "number": 1,
+            "testDisplay": "appeal",
+            "hebrew": "משיכה / קסם / פנייה"
+          },
+          {
+            "number": 2,
+            "testDisplay": "warehouse",
+            "hebrew": "מחסן"
+          },
+          {
+            "number": 3,
+            "testDisplay": "fame",
+            "hebrew": "תהילה / פרסום"
+          },
+          {
+            "number": 4,
+            "testDisplay": "purchase",
+            "hebrew": "רכישה / קנייה"
+          },
+          {
+            "number": 5,
+            "testDisplay": "critic",
+            "hebrew": "מבקר"
+          },
+          {
+            "number": 6,
+            "testDisplay": "impact",
+            "hebrew": "השפעה / רושם"
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q1-def1-appeal",
+            "definition": "a quality that makes people like something",
+            "correctItemNumber": 1,
+            "userItemNumber": 1,
+            "isCorrect": true,
+            "correctWord": {
+              "testDisplay": "appeal",
+              "hebrew": "משיכה / קסם / פנייה"
+            },
+            "userWord": {
+              "testDisplay": "appeal",
+              "hebrew": "משיכה / קסם / פנייה"
+            }
+          },
+          {
+            "id": "q1-def2-impact",
+            "definition": "a strong effect or influence on someone or something",
+            "correctItemNumber": 6,
+            "userItemNumber": 3,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "impact",
+              "hebrew": "השפעה / רושם"
+            },
+            "userWord": {
+              "testDisplay": "fame",
+              "hebrew": "תהילה / פרסום"
+            }
+          },
+          {
+            "id": "q1-def3-purchase",
+            "definition": "something that you buy, or the act of buying",
+            "correctItemNumber": 4,
+            "userItemNumber": 2,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "purchase",
+              "hebrew": "רכישה / קנייה"
+            },
+            "userWord": {
+              "testDisplay": "warehouse",
+              "hebrew": "מחסן"
+            }
+          }
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "categoryLabel": "Adjectives",
+        "items": [
+          {
+            "number": 1,
+            "testDisplay": "likely",
+            "hebrew": "סביר / צפוי"
+          },
+          {
+            "number": 2,
+            "testDisplay": "self-service",
+            "hebrew": "שירות עצמי"
+          },
+          {
+            "number": 3,
+            "testDisplay": "rural",
+            "hebrew": "כפרי"
+          },
+          {
+            "number": 4,
+            "testDisplay": "wise",
+            "hebrew": "חכם / נבון"
+          },
+          {
+            "number": 5,
+            "testDisplay": "private",
+            "hebrew": "פרטי"
+          },
+          {
+            "number": 6,
+            "testDisplay": "efficient",
+            "hebrew": "יעיל"
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q2-def1-likely",
+            "definition": "probable or expected to happen",
+            "correctItemNumber": 1,
+            "userItemNumber": 3,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "likely",
+              "hebrew": "סביר / צפוי"
+            },
+            "userWord": {
+              "testDisplay": "rural",
+              "hebrew": "כפרי"
+            }
+          },
+          {
+            "id": "q2-def2-self_service",
+            "definition": "where customers serve themselves and pay at a checkout",
+            "correctItemNumber": 2,
+            "userItemNumber": 4,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "self-service",
+              "hebrew": "שירות עצמי"
+            },
+            "userWord": {
+              "testDisplay": "wise",
+              "hebrew": "חכם / נבון"
+            }
+          },
+          {
+            "id": "q2-def3-wise",
+            "definition": "having experience, knowledge, and good judgment",
+            "correctItemNumber": 4,
+            "userItemNumber": 5,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "wise",
+              "hebrew": "חכם / נבון"
+            },
+            "userWord": {
+              "testDisplay": "private",
+              "hebrew": "פרטי"
+            }
+          }
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "categoryLabel": "Verbs",
+        "items": [
+          {
+            "number": 1,
+            "testDisplay": "to fire",
+            "hebrew": "לפטר"
+          },
+          {
+            "number": 2,
+            "testDisplay": "to experiment",
+            "hebrew": "לערוך ניסוי / להתנסות"
+          },
+          {
+            "number": 3,
+            "testDisplay": "to absorb",
+            "hebrew": "לספוג / לקלוט"
+          },
+          {
+            "number": 4,
+            "testDisplay": "to predict",
+            "hebrew": "לחזות / לנבא"
+          },
+          {
+            "number": 5,
+            "testDisplay": "to face",
+            "hebrew": "להתמודד עם / לעמוד בפני"
+          },
+          {
+            "number": 6,
+            "testDisplay": "to review",
+            "hebrew": "לסקור / לבחון מחדש"
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q3-def1-predict",
+            "definition": "say what you think will happen in the future",
+            "correctItemNumber": 4,
+            "userItemNumber": 1,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "to predict",
+              "hebrew": "לחזות / לנבא"
+            },
+            "userWord": {
+              "testDisplay": "to fire",
+              "hebrew": "לפטר"
+            }
+          },
+          {
+            "id": "q3-def2-absorb",
+            "definition": "take in liquid, gas, or information",
+            "correctItemNumber": 3,
+            "userItemNumber": 2,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "to absorb",
+              "hebrew": "לספוג / לקלוט"
+            },
+            "userWord": {
+              "testDisplay": "to experiment",
+              "hebrew": "לערוך ניסוי / להתנסות"
+            }
+          },
+          {
+            "id": "q3-def3-experiment",
+            "definition": "try out new ideas or methods to see what happens",
+            "correctItemNumber": 2,
+            "userItemNumber": 3,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "to experiment",
+              "hebrew": "לערוך ניסוי / להתנסות"
+            },
+            "userWord": {
+              "testDisplay": "to absorb",
+              "hebrew": "לספוג / לקלוט"
+            }
+          }
+        ]
+      },
+      {
+        "questionNumber": 4,
+        "categoryLabel": "Adverbs",
+        "items": [
+          {
+            "number": 1,
+            "testDisplay": "financially",
+            "hebrew": "מבחינה כלכלית / כספית"
+          },
+          {
+            "number": 2,
+            "testDisplay": "virtually",
+            "hebrew": "כמעט לחלוטין / באופן וירטואלי"
+          },
+          {
+            "number": 3,
+            "testDisplay": "increasingly",
+            "hebrew": "במידה הולכת וגוברת"
+          },
+          {
+            "number": 4,
+            "testDisplay": "hardly",
+            "hebrew": "בקושי / כמעט ולא"
+          },
+          {
+            "number": 5,
+            "testDisplay": "primarily",
+            "hebrew": "בעיקר / בראש ובראשונה"
+          },
+          {
+            "number": 6,
+            "testDisplay": "practically",
+            "hebrew": "כמעט / באופן מעשי"
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q4-def1-increasingly",
+            "definition": "happening more and more",
+            "correctItemNumber": 3,
+            "userItemNumber": 1,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "increasingly",
+              "hebrew": "במידה הולכת וגוברת"
+            },
+            "userWord": {
+              "testDisplay": "financially",
+              "hebrew": "מבחינה כלכלית / כספית"
+            }
+          },
+          {
+            "id": "q4-def2-financially",
+            "definition": "in a way that relates to money or finance",
+            "correctItemNumber": 1,
+            "userItemNumber": 2,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "financially",
+              "hebrew": "מבחינה כלכלית / כספית"
+            },
+            "userWord": {
+              "testDisplay": "virtually",
+              "hebrew": "כמעט לחלוטין / באופן וירטואלי"
+            }
+          },
+          {
+            "id": "q4-def3-practically",
+            "definition": "almost completely, or in a realistic and useful way",
+            "correctItemNumber": 6,
+            "userItemNumber": 3,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "practically",
+              "hebrew": "כמעט / באופן מעשי"
+            },
+            "userWord": {
+              "testDisplay": "increasingly",
+              "hebrew": "במידה הולכת וגוברת"
+            }
+          }
+        ]
+      },
+      {
+        "questionNumber": 5,
+        "categoryLabel": "Chunks & Expressions",
+        "items": [
+          {
+            "number": 1,
+            "testDisplay": "run out of",
+            "hebrew": "להיגמר / לאזול"
+          },
+          {
+            "number": 2,
+            "testDisplay": "in theory",
+            "hebrew": "בתאוריה / להלכה"
+          },
+          {
+            "number": 3,
+            "testDisplay": "keep track of",
+            "hebrew": "לעקוב אחר"
+          },
+          {
+            "number": 4,
+            "testDisplay": "in place of",
+            "hebrew": "במקום (משהו אחר)"
+          },
+          {
+            "number": 5,
+            "testDisplay": "relate to",
+            "hebrew": "להזדהות עם / להתייחס ל-"
+          },
+          {
+            "number": 6,
+            "testDisplay": "while",
+            "hebrew": "בזמן ש- / בעוד ש-"
+          }
+        ],
+        "definitions": [
+          {
+            "id": "q5-def1-while",
+            "definition": "during the time that, or at the same time as",
+            "correctItemNumber": 6,
+            "userItemNumber": 3,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "while",
+              "hebrew": "בזמן ש- / בעוד ש-"
+            },
+            "userWord": {
+              "testDisplay": "keep track of",
+              "hebrew": "לעקוב אחר"
+            }
+          },
+          {
+            "id": "q5-def2-relate_to",
+            "definition": "understand and feel sympathy for someone or something",
+            "correctItemNumber": 5,
+            "userItemNumber": 1,
+            "isCorrect": false,
+            "correctWord": {
+              "testDisplay": "relate to",
+              "hebrew": "להזדהות עם / להתייחס ל-"
+            },
+            "userWord": {
+              "testDisplay": "run out of",
+              "hebrew": "להיגמר / לאזול"
+            }
+          },
+          {
+            "id": "q5-def3-in_theory",
+            "definition": "according to an idea that may not work in practice",
+            "correctItemNumber": 2,
+            "userItemNumber": 2,
+            "isCorrect": true,
+            "correctWord": {
+              "testDisplay": "in theory",
+              "hebrew": "בתאוריה / להלכה"
+            },
+            "userWord": {
+              "testDisplay": "in theory",
+              "hebrew": "בתאוריה / להלכה"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
